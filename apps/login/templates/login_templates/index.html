@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+</head>
+<style media="screen">
+    .container{
+        position: relative;
+        left: 200px;
+
+        width: 400px;
+        margin: 5px;
+        padding: 0px;
+        background-color: #F4F7F8;
+        box-shadow: 5px 5px 5px #5F5F5F;
+    }
+    input{
+        display: center;
+        width: 200px;
+    }
+    .login{
+        align-content: center;
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .register{
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+</style>
+<body>
+        {%if messages%}
+        {%for x in messages%}
+        <p>{{x}}</p>
+        {%endfor%} {%endif%}
+
+        <div class="container">
+            <div class="login">
+                <form action="/login" method="post">
+                    {%csrf_token%}
+
+                    <h1>Login:</h1>
+
+                    <p>Email:</p>
+                    <p><input type="text" name="email"></p>
+                    <p>Password:</p>
+                    <p><input type="text" name="password"></p>
+                    <input type="submit" name="submit" value="Login">
+                </form>
+            </div>
+
+
+            <div class="register">
+                <form action="/register" method="post">
+                    {%csrf_token%}
+
+                    <h1>New User? Register Here:</h1>
+
+                    <p>Name:</p>
+                    <p><input type="text" name="name"></p>
+                    <p>Alias:</p>
+                    <p><input type="text" name="alias"></p>
+                    <p>Email:</p>
+                    <p><input type="text" name="email"></p>
+                    <p>Password:</p>
+                    <p><input type="text" name="password"></p>
+                    <p>Confirm password:</p>
+                    <p><input type="text" name="confirm_pw"></p>
+                    <p>Birthday:</p>
+                    <p><input type="date" name="birthday"></p>
+                    <input type="submit" name="submit" value="Register">
+                </form>
+            </div>
+
+        </div>
+
+    </body>
+
+    </html>
+
+</body>
+
+</html>

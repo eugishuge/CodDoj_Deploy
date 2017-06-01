@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+<h1>Welcome {{request.session.email}}!</h1>
+
+{%if messages%}
+{%for x in messages%}
+<p>{{x}}</p>
+{%endfor%} {%endif%}
+
+<h3>Quoteable Quotes</h3>
+<fieldset>
+{%for x in remove%}
+<fieldset>
+    {{x.author}}: {{x.quote}}
+
+    <p>posted by:
+        <a href="/bb2/user_info/{{x.id}}">{{x.posted_by}}</a></p>
+
+    <form  action="/bb2/favorites/{{x.id}}" method="post">
+        {%csrf_token%}
+        <input type="submit" name="submit" value="Add to Favorites">
+    </form>
+</fieldset>
+{%endfor%}
+</fieldset>
+
+
+<h3>My Favorite Quotes</h3>
+<fieldset>
+{%for x in all_join_fave%}
+<fieldset>
+    {{x.all_quotes.author}}: {{x.all_quotes.quote}}
+
+    <p>posted by: <a href="/bb2/user_info/{{x.all_users.id}}">{{x.all_quotes.posted_by}}</a></p>
+    <form action="/bb2/remove/{{x.all_quotes.id}}" method="post">
+        {%csrf_token%}
+        <input type="submit" name="submit" value="Remove">
+</fieldset>
+{%endfor%}
+</form>
+</fieldset>
+
+
+<h3>Contribute a Quote</h3>
+<form action="/bb2/contribute" method="post">
+    {%csrf_token%}
+    <p>Quoted By: <input type="text" name="author" value=""></p>
+    <p>Quote: <input type="TextField" name="quote" value=""></p>
+    <input type="submit" name="submit" value="Submit">
+</form>
+
+<form  action="/bb2/logout" method="post">
+    {%csrf_token%}
+<input type="submit" name="submit" value="Log Out">
+</form>
+    </body>
+</html>
